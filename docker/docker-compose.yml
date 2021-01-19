@@ -1,0 +1,13 @@
+version: '3.5'
+services:
+  jdk:
+      # images: tomhjx/java:jre.centos7.1.8.20201118
+      build: ./build
+      privileged: true
+      volumes:
+        - ~/Work:/work
+      cap_add:
+        - ALL
+networks:
+  default:
+    name: lab
