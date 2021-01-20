@@ -1,7 +1,6 @@
 version: '3.5'
 services:
-  jdk:
-      # images: tomhjx/java:jre.centos7.1.8.20201118
+  mvn:
       build: ./build
       privileged: true
       volumes:

@@ -1,4 +1,8 @@
 FROM centos:7
+
+ENV M2_HOME=/usr/local/src/apache-maven
+ENV PATH=$M2_HOME/bin:$PATH
+
 RUN (cd /lib/systemd/system/sysinit.target.wants/; for i in *; do [ $i == systemd-tmpfiles-setup.service ] || rm -f $i; done); \
     rm -f /lib/systemd/system/multi-user.target.wants/*;\
     rm -f /etc/systemd/system/*.wants/*;\
@@ -10,6 +14,13 @@ RUN (cd /lib/systemd/system/sysinit.target.wants/; for i in *; do [ $i == system
     readonly NPROC=$(grep -c ^processor /proc/cpuinfo 2>/dev/null || 1); \
     echo "NPROC=$NPROC"; \
     echo "Installing packages..."; \
-    yum install -y java-1.8.0-openjdk; \
-    cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime;
-    
+    yum install -y java-1.8.0-openjdk-devel wget which; \
+    java -version; \
+    cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime; \
+    wget https://mirror.bit.edu.cn/apache/maven/maven-3/3.6.3/binaries/apache-maven-3.6.3-bin.tar.gz; \
+    tar -xf apache-maven-3.6.3-bin.tar.gz; \
+    mv apache-maven-3.6.3/ /usr/local/src/apache-maven/; \
+    chmod +x /usr/local/src/apache-maven/bin/mvn; \
+    mvn --version
+
+COPY settings.xml /usr/local/src/apache-maven/conf/settings.xml
