@@ -25,9 +25,8 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
       - name: Push
-        env:
-          DOCKER_RELEASE_TAG: "tomhjx/java:${GITHUB_REF#refs/*/}"
         run: |
+          DOCKER_RELEASE_TAG="tomhjx/java:${GITHUB_REF#refs/*/}"
           docker build ${{ github.workspace }}/docker/build -t $DOCKER_RELEASE_TAG
           docker push $DOCKER_RELEASE_TAG
 
