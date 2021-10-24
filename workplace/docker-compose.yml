@@ -1,0 +1,16 @@
+version: '3.5'
+services:
+  java-vscode:
+      image: tomhjx/java:openjdk-16-mvn-3.6.2-gradle-5.4.1-vscode
+      privileged: true
+      cap_add:
+        - ALL
+      command: /bin/sh -c "while sleep 1000; do :; done"
+      volumes:
+        - .:/workspaces:cached
+        - /data/project:/work/project
+        # - ./.vscode-data:/vscode
+        - ./.m2:/home/vscode/.m2
+networks:
+  default:
+    name: lab
