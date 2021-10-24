@@ -3,6 +3,9 @@
 https://code.visualstudio.com/docs/remote/create-dev-container
 
 
+## 环境
+
+
 ```bash
 
 $ java -version
@@ -45,3 +48,15 @@ Default locale: en, platform encoding: UTF-8
 OS name: "linux", version: "5.10.25-linuxkit", arch: "amd64", family: "unix"
 
 ```
+
+## 例子
+
+```bash
+
+$ docker build ./docker/build -t tomhjx/java:openjdk-16-mvn-3.6.2-gradle-5.4.1-vscode
+
+
+
+```
+
+![](./examples/vscode23.43.42.gif)
